@@ -280,3 +280,99 @@ if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level.1"))
 }
 Note that, in both cases, "Level.1" should be replaced with the actual name of the scene you want to check against.
 
+I want to get a TMP object that has a gameobject tag and set its image
+You can use the GameObject.FindWithTag() method to find a GameObject with a specific tag and then use the GetComponent<T>() method to access the TMP object on that GameObject. Once you have a reference to the TMP object, you can set its image by accessing its text property and assigning it a new value. Here is an example of how you can do this in C#:
+
+Copy code
+GameObject textObject = GameObject.FindWithTag("TMPObjectTag");
+if (textObject != null)
+{
+    TMP_Text tmpText = textObject.GetComponent<TMP_Text>();
+    if (tmpText != null)
+    {
+        tmpText.text = "New Text";
+    }
+}
+In this example, "TMPObjectTag" should be replaced with the actual tag of the GameObject that contains the TMP object you want to access.
+
+You can also use the GetComponentsInChildren<T>() method to get all TMP object under a certain object and its children.
+
+Copy code
+TMP_Text[] tmpTexts = parentObject.GetComponentsInChildren<TMP_Text>();
+foreach(TMP_Text tmpText in tmpTexts)
+{
+    tmpText.text = "New Text";
+}
+In this example, parentObject should be replaced with the actual object that contains the TMP object you want to access.
+
+
+
+instead I want to change the panel image to a new image
+You can use the GetComponent<Image>() method to get the Image component of the panel GameObject, and then use the sprite property to change the image. Here is an example of how you can do this in C#:
+
+Copy code
+GameObject panelObject = GameObject.FindWithTag("PanelTag");
+if (panelObject != null)
+{
+    Image panelImage = panelObject.GetComponent<Image>();
+    if (panelImage != null)
+    {
+        panelImage.sprite = newSprite;
+    }
+}
+In this example, "PanelTag" should be replaced with the actual tag of the GameObject that you want to change the image, and newSprite is a variable containing the new sprite that you want to set to the image.
+
+You can also use GetComponentsInChildren<Image>() method to get all the Image component under a certain object and its children.
+
+Copy code
+Image[] images = parentObject.GetComponentsInChildren<Image>();
+foreach(Image image in images)
+{
+    image.sprite = newSprite;
+}
+In this example, parentObject should be replaced with the actual object that contains the panel object you want to access.
+
+
+
+Severity	Code	Description	Project	File	Line	Suppression State
+Error	CS0246	The type or namespace name 'Image' could not be found (are you missing a using directive or an assembly reference?)	Assembly-CSharp	C:\Users\Mage\Documents\Unity Projects\Metro\Assets\Scripts\GameManager.cs	82	Active
+3
+The error message you're seeing is indicating that the Image class cannot be found. This means that the UnityEngine.UI namespace, which contains the Image class, is not included in your script.
+
+You can fix this by adding the following line at the top of your script:
+
+Copy code
+using UnityEngine.UI;
+You also need to make sure that you have the UnityEngine.UI package imported in your Unity project. You can import the package by going to the Unity Package Manager (Window > Package Manager) and searching for and importing the UnityEngine.UI package.
+
+Once you have imported the package, you should be able to use the Image class and other UI classes without issue.
+
+Please note that in order to use the UI elements in Unity, you need to have the UnityEngine.UI package imported in your project and also you should have a Canvas object in your scene.
+
+
+
+a script where on load it picks a random item from an array and plays that sound on load on loop
+Here is an example of a script in C# that selects a random sound from an array of audio clips and plays it on loop when the scene is loaded:
+
+Copy code
+using UnityEngine;
+
+public class RandomSoundPlayer : MonoBehaviour
+{
+    public AudioClip[] sounds;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        int randomIndex = Random.Range(0, sounds.Length);
+        audioSource.clip = sounds[randomIndex];
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+}
+In this script, the sounds array is a public variable that should be set in the Unity editor to contain the audio clips that you want to choose from. The Start() function is called when the scene is loaded, it uses the Random.Range(int min, int max) function to pick a random index for the array of sounds, and then sets the clip property of the AudioSource component to the selected sound and sets the loop property to true to make the sound play on loop.
+
+You should attach this script to a GameObject in your scene and make sure that the GameObject has an AudioSource component attached to it. Also, you should drag and drop the audio clips you want to pick randomly into the 'sounds' array in the Unity editor.
+
+You can also use the Awake() method instead of Start() if you want the sound to play as soon as the script's object is instantiated.
