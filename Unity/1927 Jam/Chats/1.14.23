@@ -376,3 +376,1534 @@ In this script, the sounds array is a public variable that should be set in the 
 You should attach this script to a GameObject in your scene and make sure that the GameObject has an AudioSource component attached to it. Also, you should drag and drop the audio clips you want to pick randomly into the 'sounds' array in the Unity editor.
 
 You can also use the Awake() method instead of Start() if you want the sound to play as soon as the script's object is instantiated.
+
+
+
+Help me make a basic puzzle game in unity using UI so it's click only
+Sure, here's a basic outline of how you can create a puzzle game using Unity's UI system and make it click-only:
+
+Create a new Unity project and set up the scene for your puzzle game.
+
+Create the puzzle pieces using Unity's UI elements such as Image and Button components. You can also use the Rect Transform component to position and resize the puzzle pieces.
+
+Create a script to handle the logic for the puzzle game. In this script, you can use the OnClick() event of the Button component to detect when a puzzle piece is clicked.
+
+In the script, create a function that checks if the clicked puzzle piece is in the correct position and if it is, then make it unclickable.
+
+Create a win condition and when that is met, give player a message or redirect to next level.
+
+Attach the script to the puzzle pieces and test the game to make sure it's working as expected.
+
+Note: This is a very basic outline of how to create a puzzle game in Unity using UI. You can add more features and functionality to make the game more interesting, like a timer, a shuffle button, and a restart button.
+
+
+
+I want to create a unity scene where the camera stays still but a maze is drawn as it travels forward through this forever repeating maze
+Here's an outline of how you can create a Unity scene where the camera stays still but a maze is drawn as it travels forward through a forever repeating maze:
+
+Create a new Unity scene and set up the camera so that it is fixed in place and facing forward.
+
+Create the maze using Unity's 3D modeling tools such as Unity's primitive objects like cubes, cylinders and spheres.
+
+Create a script that will handle the generation of the maze as the camera moves forward.
+
+Use Unity's Transform class to move the maze forward in the direction the camera is facing.
+
+Use Unity's Instantiate() method to create new instances of the maze as the camera moves forward, and use Unity's Destroy() method to remove instances of the maze that are no longer visible to the camera.
+
+Create a looping mechanism to make the maze repeat infinitely.
+
+Attach the script to the camera and test the scene to make sure the maze is generated and moving correctly.
+
+Note: Creating a maze is a complex task and it could be time-consuming depending on the complexity of the maze you are trying to create. It is recommended to start with simple shapes and then move forward with more complex shapes. Also, you might want to use Unity's Navmesh feature to make sure your character can navigate through the maze easily.
+
+
+
+I want to build a logic puzzle using C# to implement dijkstra algorithm
+Here's an outline of how you can build a logic puzzle using C# to implement the Dijkstra algorithm:
+
+Create a new C# project in Unity and set up the scene for your puzzle.
+
+Create a grid of nodes, each representing a square on the puzzle board. Each node should have a list of neighboring nodes and a distance value.
+
+Implement the Dijkstra algorithm in C# to find the shortest path from a starting node to an end node. The algorithm should iterate through all the nodes in the grid, starting with the starting node, and update the distance values for each neighboring node based on the current node's distance value.
+
+Create a function that takes the starting node and end node as parameters and returns the shortest path as a list of nodes.
+
+Create a script that handles the logic for the puzzle game, using the Dijkstra algorithm to find the shortest path and check if the player has made the correct move.
+
+Attach the script to the puzzle and test the game to make sure it's working as expected.
+
+Note: This is a basic outline of how to implement Dijkstra algorithm in a logic puzzle. You can add more features and functionality to make the game more interesting, like different types of nodes with different properties, obstacles, and multiple solutions.
+
+Also, note that Dijkstra algorithm is very suitable for puzzles that have a single solution, if you want to create a puzzle with multiple solutions, you might consider using other algorithms such as A* algorithm.
+
+
+
+lets make a puzzle using A*, show me how in C# for unity
+Sure, here's an outline of how you can create a puzzle using the A* algorithm in C# for Unity:
+
+Create a new Unity project and set up the scene for your puzzle.
+
+Create a grid of nodes, each representing a square on the puzzle board. Each node should have a list of neighboring nodes, a distance value, and a heuristic value.
+
+Implement the A* algorithm in C#. The algorithm should use a priority queue to iterate through all the nodes in the grid, starting with the starting node. It will update the distance values for each neighboring node based on the current node's distance value and the heuristic value. The heuristic value can be the estimated distance from the current node to the end node.
+
+Create a function that takes the starting node and end node as parameters and returns the shortest path as a list of nodes.
+
+Create a script that handles the logic for the puzzle game, using the A* algorithm to find the shortest path and check if the player has made the correct move.
+
+Attach the script to the puzzle and test the game to make sure it's working as expected.
+
+Note: This is a basic outline of how to implement the A* algorithm in a puzzle. You can add more features and functionality to make the game more interesting, like different types of nodes with different properties, obstacles, and multiple solutions.
+
+Also, keep in mind that A* algorithm is a bit more complex than Dijkstra, so it might take a bit more time to implement it, but it will give you more options for creating more complex puzzles.
+
+
+
+okay, the project is made and I have a scene setup for this,
+
+how can I create the grid of nodes 
+Here's one way you can create a grid of nodes in Unity:
+
+Create a new script in Unity and call it "Node.cs". This script will define the properties and behavior of a single node in the grid.
+
+In the Node.cs script, define a class called "Node" with the following properties:
+
+A Vector3 position to store the node's position in the scene
+A list of neighboring nodes
+A distance value
+A heuristic value (if using A*)
+Create another script and call it "Grid.cs" This script will be responsible for creating the grid of nodes and managing their properties.
+
+In the Grid.cs script, define a class called "Grid" with the following properties:
+
+A 2D array of nodes to store the grid
+The size of the grid (number of rows and columns)
+The distance between the nodes
+In the Grid class, create a method called "CreateGrid()" that will be responsible for creating the grid of nodes.
+
+Within the CreateGrid() method, use a nested loop to iterate through the rows and columns of the grid, creating new Node objects for each position in the grid and storing them in the 2D array.
+
+Also, within the CreateGrid() method, set the position of each node based on its row and column index in the grid, and set the neighboring nodes based on the node's position in the grid.
+
+In the Unity editor, create an empty game object and attach the Grid.cs script to it. Set the size of the grid and distance between the nodes in the inspector.
+
+Add this script to the game object and call the CreateGrid() method in the Start() method to create the grid of nodes.
+
+You can also add visual representation for the grid and the nodes by creating prefabs or using Unity's UI system.
+
+Note: This is one way to create a grid of nodes in Unity, but there are other ways you can do it as well, depending on the specific requirements of your project.
+
+
+
+show me the node script
+Here's an example of how you might implement the Node class in C# for Unity:
+
+Copy code
+using UnityEngine;
+using System.Collections.Generic;
+
+public class Node {
+
+    public Vector3 position; // Node's position in the scene
+    public List<Node> neighbors; // List of neighboring nodes
+    public float distance; // Distance from the start node
+    public float heuristic; // Heuristic value (if using A*)
+
+    public Node(Vector3 pos) {
+        position = pos;
+        neighbors = new List<Node>();
+    }
+
+    // Method to add a neighboring node
+    public void AddNeighbor(Node neighbor) {
+        neighbors.Add(neighbor);
+    }
+}
+In this example, the Node class has a Vector3 property called "position" to store the node's position in the scene, a List property called "neighbors" to store the neighboring nodes, a float property called "distance" to store the distance from the start node, and a float property called "heuristic" to store the heuristic value (if using A*).
+
+The class also has a constructor that takes a Vector3 parameter and sets the position property to that value and also initialize an empty list for the neighbors.
+
+It also has a method called "AddNeighbor" that takes a Node parameter and adds it to the neighbors list.
+
+You can add or modify the properties and methods of the Node class as needed for your specific puzzle.
+
+
+
+now show me the grid.cs script
+Here's an example of how you might implement the Grid class in C# for Unity:
+
+Copy code
+using UnityEngine;
+
+public class Grid : MonoBehaviour {
+
+    public int gridSizeX, gridSizeY; // The size of the grid (number of rows and columns)
+    public float nodeRadius; // The distance between the nodes
+    public Node[,] grid; // 2D array of nodes to store the grid
+
+    // Method to create the grid of nodes
+    public void CreateGrid() {
+
+        grid = new Node[gridSizeX, gridSizeY]; // Initialize the 2D array of nodes
+
+        // Iterate through the rows and columns of the grid
+        for (int x = 0; x < gridSizeX; x++) {
+            for (int y = 0; y < gridSizeY; y++) {
+
+                // Calculate the position of the node
+                Vector3 nodePos = new Vector3(x * nodeRadius, 0, y * nodeRadius);
+
+                // Create a new Node object and store it in the grid
+                grid[x, y] = new Node(nodePos);
+
+                // Check for neighboring nodes and add them
+                if (x > 0) {
+                    grid[x, y].AddNeighbor(grid[x - 1, y]);
+                }
+                if (x < gridSizeX - 1) {
+                    grid[x, y].AddNeighbor(grid[x + 1, y]);
+                }
+                if (y > 0) {
+                    grid[x, y].AddNeighbor(grid[x, y - 1]);
+                }
+                if (y < gridSizeY - 1) {
+                    grid[x, y].AddNeighbor(grid[x, y + 1]);
+                }
+            }
+        }
+    }
+
+    // Use this for initialization
+    void Start() {
+        CreateGrid();
+    }
+}
+In this example, the Grid class is a MonoBehaviour class, which means it can be attached to a GameObject in the Unity scene. It has public properties for the size of the grid, the distance between the nodes, and the 2D array of nodes.
+
+The CreateGrid() method is responsible for creating the grid of nodes. It initializes the 2D array of nodes and uses nested loops to iterate through the rows and columns of the grid, creating new Node objects for each position in the grid and storing them in the 2D array. It also calculates the position of each node based on its row and column index in the grid, and sets the neighboring nodes based on the node's position in the grid.
+
+The Start() method is called when the Unity scene starts, and it calls the CreateGrid() method to create the grid of nodes.
+
+This is just an example, you can modify the properties and methods of the Grid class as needed for your specific puzzle. You can also use the Unity's UI system to visualize the grid, instead of simply creating the nodes.
+
+
+
+how do I setup the node and grid scripts in a scene
+Here's an example of how you might set up the Node and Grid scripts in a Unity scene:
+
+Create an empty GameObject in the Unity scene and name it "Grid".
+
+Attach the Grid script to the "Grid" GameObject by dragging the script onto the GameObject in the Unity editor.
+
+In the inspector, set the size of the grid (gridSizeX and gridSizeY), the distance between the nodes (nodeRadius), and any other properties you wish to set.
+
+Create a prefab of the node that you want to use, it can be a simple cube or sphere with a material.
+
+In the Grid script's CreateGrid() method, instead of creating new Node objects, you can use the Instantiate() method to create instances of the node prefab for each position in the grid.
+
+After instantiating the node prefab, you can set the position of each node based on its row and column index in the grid, using the transform.position property of the GameObject.
+
+Also, you can set the neighboring nodes by getting the Node script component from each instantiated node prefab, and add it to the neighbors list.
+
+Once you have set up the Grid GameObject in the scene, you can use the A* algorithm to find the shortest path between the nodes, and the Grid object will act as the container of the nodes.
+
+You can add more functionality to the Grid script such as visualizing the grid, adding/removing nodes, and handling the player's movement on the grid.
+
+Note: This is just an example of how you might set up the Node and Grid scripts in a Unity scene, but you can also use other methods to visualize the grid, like creating UI elements or using Unity's LineRenderer component.
+
+
+
+show me how to instansiate
+Here's an example of how you can use Unity's Instantiate() method to instantiate a prefab in C#:
+
+Copy code
+using UnityEngine;
+
+public class Grid : MonoBehaviour {
+
+    public GameObject nodePrefab; // Prefab for the node
+    public int gridSizeX, gridSizeY; // The size of the grid (number of rows and columns)
+    public float nodeRadius; // The distance between the nodes
+    public Node[,] grid; // 2D array of nodes to store the grid
+
+    // Method to create the grid of nodes
+    public void CreateGrid() {
+
+        grid = new Node[gridSizeX, gridSizeY]; // Initialize the 2D array of nodes
+
+        // Iterate through the rows and columns of the grid
+        for (int x = 0; x < gridSizeX; x++) {
+            for (int y = 0; y < gridSizeY; y++) {
+
+                // Calculate the position of the node
+                Vector3 nodePos = new Vector3(x * nodeRadius, 0, y * nodeRadius);
+
+                // Instantiate a new node prefab
+                GameObject node = Instantiate(nodePrefab, nodePos, Quaternion.identity);
+                node.transform.parent = transform; // Set the prefab's parent to be the Grid gameObject
+
+                // Get the Node script component from the prefab
+                grid[x, y] = node.GetComponent<Node>();
+
+                // Check for neighboring nodes and add them
+                if (x > 0) {
+                    grid[x, y].AddNeighbor(grid[x - 1, y]);
+                }
+                if (x < gridSizeX - 1) {
+                    grid[x, y].AddNeighbor(grid[x + 1, y]);
+                }
+                if (y > 0) {
+                    grid[x, y].AddNeighbor(grid[x, y - 1]);
+                }
+                if (y < gridSizeY - 1) {
+                    grid[x, y].AddNeighbor(grid[x, y + 1]);
+                }
+            }
+        }
+    }
+
+    // Use this for initialization
+    void Start() {
+        CreateGrid();
+    }
+}
+In this example, the Grid script has a public property called "nodePrefab" that is used to store the prefab for the node. The CreateGrid() method uses the Instantiate() method to create new instances of the node prefab for each position in the grid. The Instantiate() method takes three parameters:
+
+The prefab to instantiate
+The position of the instantiated prefab
+The rotation of the instantiated prefab.
+The method returns a new GameObject that is an instance of the prefab, and it is stored in the "node" variable. The new instantiated node's position is set to the calculated position of each node, and it's parent is set to be the Grid gameObject. Finally, it gets the Node script component from the instantiated node and adds it to the grid.
+
+This way you can use the instantiated node object to set the neighboring nodes and also use it to add functionality to the node as you wish.
+
+Note: Keep in mind that you should have the prefab ready in your project before starting to instantiate it.
+
+
+
+now with the grid, I can spawn nodes, use A* to make a  logic puzzle please?
+Yes, now that you have a grid of nodes, you can use the A* algorithm to create a logic puzzle. Here's an example of how you might use the A* algorithm in C# for Unity:
+
+Create a new script in Unity and call it "AStar.cs". This script will contain the logic for the A* algorithm.
+
+In the AStar.cs script, create a static function called "FindPath" that takes a start node, an end node, and a grid as parameters.
+
+Inside the FindPath() function, create a priority queue to store the nodes to be visited. Add the start node to the priority queue with a priority value of 0.
+
+Create a while loop that continues until the priority queue is empty.
+
+In the while loop, remove the node with the lowest priority value from the priority queue and store it in a variable called "currentNode".
+
+For each neighboring node of the current node, calculate the new distance value by adding the current node's distance value to the distance between the current node and the neighboring node. If the new distance value is less than the current distance value of the neighboring node, update the distance value and set the current node as the previous node.
+
+Also, calculate the heuristic value for each neighboring node as the estimated distance from the current node to the end node.
+
+Add the neighboring node to the priority queue with a priority value equal to the distance value plus the heuristic value.
+
+Once the end node is removed from the priority queue, create a new list to store the shortest path.
+
+Using the previous node values, trace the path back from the end node to the start node and add each node to the shortest path list.
+
+Return the shortest path list as the result of the FindPath() function.
+
+In your game logic script, call the FindPath() function with the appropriate start node, end node, and grid, and use the returned path to guide the player through the puzzle.
+
+Note: This is a basic example of how to use the A* algorithm to find the shortest path between two nodes in a grid. You can add more features and functionality to make the game more interesting, like different types of nodes with different properties, obstacles, and multiple solutions.
+
+Also, keep in mind that using the A* algorithm for a puzzle with a single solution would be an overkill, since Dijkstra algorithm is more efficient for that case.
+
+
+
+right now: the gird just draws a node for each x,y, can we make it where it draws a maze instead of just points on the grid
+Yes, you can use the grid of nodes to draw a maze instead of just points on the grid. Here's an example of how you might do it:
+
+Create a new script in Unity and call it "MazeGenerator.cs". This script will contain the logic for generating the maze.
+
+In the MazeGenerator.cs script, create a method called "GenerateMaze()" that takes a grid of nodes as a parameter.
+
+Inside the GenerateMaze() method, you can use a variety of algorithms to generate the maze, such as the Depth-First Search (DFS) algorithm or the Breadth-First Search (BFS) algorithm.
+
+For example, if you choose to use the DFS algorithm, you can start at a random node and randomly choose an unvisited neighboring node and remove the wall between them.
+
+As you move through the grid, you can mark the visited nodes and continue to remove walls between neighboring nodes until all the nodes have been visited.
+
+Once the maze is generated, you can use the Unity's LineRenderer component to draw the walls between the nodes.
+
+You can also use the Unity's 3D models to create a 3D maze, by instantiating walls, corner, and path objects on the correct position in the grid, according to the generated maze.
+
+
+
+show me the maze generator cs
+Here's an example of how you might implement the MazeGenerator class in C# for Unity:
+
+Copy code
+using UnityEngine;
+
+public class MazeGenerator : MonoBehaviour {
+
+    public Node[,] grid;
+    public GameObject wall;
+
+    // Method to generate the maze
+    public void GenerateMaze() {
+
+        // initialize the maze
+        InitializeMaze();
+
+        // use DFS algorithm to generate the maze
+        DFS(grid[0, 0]);
+
+        // draw the walls
+        DrawWalls();
+    }
+
+    private void InitializeMaze() {
+        for (int x = 0; x < grid.GetLength(0); x++) {
+            for (int y = 0; y < grid.GetLength(1); y++) {
+                grid[x, y].visited = false;
+                grid[x, y].walls = new bool[] { true, true, true, true };
+            }
+        }
+    }
+
+    private void DFS(Node current) {
+        current.visited = true;
+
+        while (true) {
+            Node next = GetRandomNeighbour(current);
+            if (next == null) {
+                break;
+            }
+
+            RemoveWalls(current, next);
+            current = next;
+            current.visited = true;
+        }
+    }
+
+    private Node GetRandomNeighbour(Node current) {
+        List<Node> neighbours = new List
+
+
+continue from the line: 
+``` private Node GetRandomNeighbour(Node current) {
+Sure, here's how the method could continue:
+
+Copy code
+    private Node GetRandomNeighbour(Node current) {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited) {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited) {
+            neighbours.Add(grid[x + 1, y]);
+        }
+        if (y > 0 && !grid[x, y - 1].visited) {
+            neighbours.Add(grid[x, y - 1]);
+        }
+        if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited) {
+            neighbours.Add(grid[x, y + 1]);
+        }
+
+        if (neighbours.Count == 0) {
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, neighbours.Count);
+        return neighbours[randomIndex];
+    }
+This method is used to get a random unvisited neighboring node of the current node. It uses a list to store the unvisited neighboring nodes and then selects a random one from the list.
+
+It also uses grid.GetLength(0) and grid.GetLength(1) to get the size of the grid and make sure it doesn't go out of bounds.
+
+The RemoveWalls(current, next); method is used to remove the walls between the current node and the next node. You can implement it in the same script or in another script as you see fit.
+
+After the maze is generated, you can use the DrawWalls(); method to draw the walls between
+
+
+
+using UnityEngine;
+
+public class MazeGenerator : MonoBehaviour
+{
+
+    public Node[,] grid;
+    public GameObject wall;
+
+    // Method to generate the maze
+    public void GenerateMaze()
+    {
+
+        // initialize the maze
+        InitializeMaze();
+
+        // use DFS algorithm to generate the maze
+        DFS(grid[0, 0]);
+
+        // draw the walls
+        DrawWalls();
+    }
+
+    private void InitializeMaze()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                grid[x, y].visited = false;
+                grid[x, y].walls = new bool[] { true, true, true, true };
+            }
+        }
+    }
+
+    private void DFS(Node current)
+    {
+        current.visited = true;
+
+        while (true)
+        {
+            Node next = GetRandomNeighbour(current);
+            if (next == null)
+            {
+                break;
+            }
+
+            RemoveWalls(current, next);
+            current = next;
+            current.visited = true;
+        }
+    }
+
+    private Node GetRandomNeighbour(Node current)
+    {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited)
+        {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited)
+        {
+            neighbours.Add(grid[x + 1, y]);
+        }
+        if (y > 0 && !grid[x, y - 1].visited)
+        {
+            neighbours.Add(grid[x, y - 1]);
+        }
+        if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited)
+        {
+            neighbours.Add(grid[x, y + 1]);
+        }
+
+        if (neighbours.Count == 0)
+        {
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, neighbours.Count);
+        return neighbours[randomIndex];
+    }
+}
+
+
+can you look at this and clean it up? please return only the code in a code block
+Here is the cleaned version of the code:
+
+Copy code
+using UnityEngine;
+using System.Collections.Generic;
+
+public class MazeGenerator : MonoBehaviour
+{
+    public Node[,] grid;
+    public GameObject wall;
+
+    public void GenerateMaze()
+    {
+        InitializeMaze();
+        DFS(grid[0, 0]);
+        DrawWalls();
+    }
+
+    private void InitializeMaze()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                grid[x, y].visited = false;
+                grid[x, y].walls = new bool[] { true, true, true, true };
+            }
+        }
+    }
+
+    private void DFS(Node current)
+    {
+        current.visited = true;
+
+        while (true)
+        {
+            Node next = GetRandomNeighbour(current);
+            if (next == null)
+            {
+                break;
+            }
+            RemoveWalls(current, next);
+            current = next;
+            current.visited = true;
+        }
+    }
+
+    private Node GetRandomNeighbour(Node current)
+    {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited)
+        {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x
+
+
+complete the method, starting from the GetRandomNeighbour
+Sure, here's how the GetRandomNeighbour() method could be completed:
+
+Copy code
+    private Node GetRandomNeighbour(Node current) {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited) {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited) {
+            neighbours.Add(grid[x + 1, y]);
+        }
+        if (y > 0 && !grid[x, y - 1].visited) {
+            neighbours.Add(grid[x, y - 1]);
+        }
+        if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited) {
+            neighbours.Add(grid[x, y + 1]);
+        }
+
+        if (neighbours.Count == 0) {
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, neighbours.Count);
+        return neighbours[randomIndex];
+    }
+    private void RemoveWalls(Node current, Node next)
+    {
+        int x = current.x - next.x;
+        int y = current.y - next.y;
+
+        if (x == 1)
+        {
+            current.walls[3] = false;
+            next.walls[1] = false;
+        }
+        else if (x == -
+
+
+keep going
+Sure, here's how the RemoveWalls() method could continue:
+
+Copy code
+    private void RemoveWalls(Node current, Node next) {
+        int x = current.x - next.x;
+        int y = current.y - next.y;
+
+        if (x == 1) {
+            current.walls[3] = false;
+            next.walls[1] = false;
+        }
+        else if (x == -1) {
+            current.walls[1] = false;
+            next.walls[3] = false;
+        }
+        else if (y == 1) {
+            current.walls[0] = false;
+            next.walls[2] = false;
+        }
+        else if (y == -1) {
+            current.walls[2] = false;
+            next.walls[0] = false;
+        }
+    }
+
+    private void DrawWalls()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                if (grid[x, y].walls[0])
+                {
+                    Instantiate(wall, new Vector3(x, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[1])
+                {
+                    Instantiate(wall, new Vector3(x + 1, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[2])
+                {
+                    Instantiate(wall, new Vector3(x, y - 1, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[3])
+                {
+                    Instantiate(wall, new Vector3(x - 1, y, 1), Quaternion.identity);
+                }
+            }
+        }
+    }
+}
+The RemoveWalls() method is used to remove the walls between the current node and the next node, it checks the position of the nodes in relation to each other and turns off the walls accordingly.
+
+The DrawWalls() method uses the Unity's Instantiate method to create wall GameObject at the correct positions in the grid, using the information stored in the walls array of each Node.
+
+You might need to adjust the position of the walls, depending on your scene and grid setup.
+
+You can also add a start point and end point to the maze and use A* to find the path between them.
+
+
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class MazeGenerator : MonoBehaviour
+{
+    public Node[,] grid;
+    public GameObject wall;
+
+    public void GenerateMaze()
+    {
+        InitializeMaze();
+        DFS(grid[0, 0]);
+        DrawWalls();
+    }
+
+    private void InitializeMaze()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                grid[x, y].visited = false;
+                grid[x, y].walls = new bool[] { true, true, true, true };
+            }
+        }
+    }
+
+    private void DFS(Node current)
+    {
+        current.visited = true;
+
+        while (true)
+        {
+            Node next = GetRandomNeighbour(current);
+            if (next == null)
+            {
+                break;
+            }
+            RemoveWalls(current, next);
+            current = next;
+            current.visited = true;
+        }
+    }
+
+    private Node GetRandomNeighbour(Node current)
+    {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited)
+        {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited)
+        {
+            neighbours.Add(grid[x + 1, y]);
+        }
+        if (y > 0 && !grid[x, y - 1].visited)
+        {
+            neighbours.Add(grid[x, y - 1]);
+        }
+        if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited)
+        {
+            neighbours.Add(grid[x, y + 1]);
+        }
+
+        if (neighbours.Count == 0)
+        {
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, neighbours.Count);
+        return neighbours[randomIndex];
+    }
+    private void RemoveWalls(Node current, Node next)
+    {
+        int x = current.x - next.x;
+        int y = current.y - next.y;
+
+        if (x == 1)
+        {
+            current.walls[3] = false;
+            next.walls[1] = false;
+        }
+        else if (x == -1)
+        {
+            current.walls[1] = false;
+            next.walls[3] = false;
+        }
+        else if (y == 1)
+        {
+            current.walls[0] = false;
+            next.walls[2] = false;
+        }
+        else if (y == -1)
+        {
+            current.walls[2] = false;
+            next.walls[0] = false;
+        }
+    }
+
+    private void DrawWalls()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                if (grid[x, y].walls[0])
+                {
+                    Instantiate(wall, new Vector3(x, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[1])
+                {
+                    Instantiate(wall, new Vector3(x + 1, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[2])
+                {
+                    Instantiate(wall, new Vector3(x, y - 1, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[3])
+                {
+                    Instantiate(wall, new Vector3(x - 1, y, 1), Quaternion.identity);
+                }
+            }
+        }
+    }
+}
+
+
+did we forget walls and visited somewhere?
+It looks like the Node class is missing a visited variable and a walls array.
+Here's an example of what the Node class could look like:
+
+Copy code
+public class Node {
+    public int x;
+    public int y;
+    public bool visited;
+    public bool[] walls;
+
+    public Node(int x, int y) {
+        this.x = x;
+        this.y = y;
+        visited = false;
+        walls = new bool[] { true, true, true, true };
+    }
+}
+The visited variable is used to keep track of whether the node has been visited during the maze generation process.
+The walls array is used to keep track of which walls are present around the node, so that they can be drawn correctly. The order of the walls in the array is North, East, South, West.
+
+You can also add a start point and end point to the maze and use A* to find the path between them.
+Please note that this is just an example, you may need to adjust it to fit your specific requirements.
+
+
+
+how can I access the grid of nodes made by the grid.cs script for the mazegenreator.cs
+You can access the grid of nodes in the MazeGenerator script by making the grid variable public and then referencing it from the other script. In the MazeGenerator script, you can set the grid variable to be equal to the grid variable in the Grid script.
+
+In the MazeGenerator script, you can add a public variable of the same type as the grid in the Grid script:
+
+Copy code
+public Node[,] grid;
+Then you can reference the grid variable in the Grid script in the Start() method or in the method that creates the grid, by assigning it to the grid variable in MazeGenerator script:
+
+Copy code
+mazeGenerator.grid = grid;
+You also need to get the reference of the script that contains the grid, you can do this by using the GetComponent method like this:
+
+Copy code
+mazeGenerator = GetComponent<MazeGenerator>();
+Make sure to add the using UnityEngine; and using System.Collections; at the top of the script, if you haven't already.
+
+You can also use the FindObjectOfType method to find the Grid script and get its grid variable and assign it to the MazeGenerator script.
+
+Copy code
+grid = FindObjectOfType<Grid>().grid;
+It's important that the Grid script is already been instantiated when you are trying to access it.
+Please note that this is just an example, you may need to adjust it to fit your specific requirements.
+
+
+
+show me in the maze.cs
+Sure, you can add the following code in the Start() method of the MazeGenerator script to access the grid from the Grid script:
+
+Copy code
+void Start()
+{
+    // Get the reference to the Grid script
+    Grid gridScript = FindObjectOfType<Grid>();
+
+    // Assign the grid from the Grid script to the MazeGenerator script
+    grid = gridScript.grid;
+
+    // Generate the maze
+    GenerateMaze();
+}
+It's important that the Grid script is already been instantiated when you are trying to access it.
+You can also add a public variable of the same type as the grid in the Grid script and reference it in the MazeGenerator script
+
+Copy code
+public Grid gridScript;
+Then in the Start Method of the script you can assign the grid to the grid of MazeGenerator
+
+Copy code
+grid = gridScript.grid;
+Please note that this is just an example, you may need to adjust it to fit your specific requirements.
+
+
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class MazeGenerator : MonoBehaviour
+{
+    public Node[,] grid;
+    public GameObject wall;
+
+
+    public void GenerateMaze()
+    {
+        InitializeMaze();
+        DFS(grid[0, 0]);
+        DrawWalls();
+    }
+
+    private void InitializeMaze()
+    {
+        if(grid!=null)
+        {
+            for (int x = 0; x < grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < grid.GetLength(1); y++)
+                {
+                    grid[x, y].visited = false;
+                    grid[x, y].walls = new bool[] { true, true, true, true };
+                }
+            }
+        }
+        else
+        {
+            Grid gridScript = FindObjectOfType<Grid>();
+
+            // Assign the grid from the Grid script to the MazeGenerator script
+            grid = gridScript.grid;
+            InitializeMaze();
+            Debug.Log("Trying Again");
+        }
+
+    }
+
+    private void DFS(Node current)
+    {
+        current.visited = true;
+
+        while (true)
+        {
+            Node next = GetRandomNeighbour(current);
+            if (next == null)
+            {
+                break;
+            }
+            RemoveWalls(current, next);
+            current = next;
+            current.visited = true;
+        }
+    }
+
+    private Node GetRandomNeighbour(Node current)
+    {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited)
+        {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited)
+        {
+            neighbours.Add(grid[x + 1, y]);
+        }
+        if (y > 0 && !grid[x, y - 1].visited)
+        {
+            neighbours.Add(grid[x, y - 1]);
+        }
+        if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited)
+        {
+            neighbours.Add(grid[x, y + 1]);
+        }
+
+        if (neighbours.Count == 0)
+        {
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, neighbours.Count);
+        return neighbours[randomIndex];
+    }
+    private void RemoveWalls(Node current, Node next)
+    {
+        int x = current.x - next.x;
+        int y = current.y - next.y;
+
+        if (x == 1)
+        {
+            current.walls[3] = false;
+            next.walls[1] = false;
+        }
+        else if (x == -1)
+        {
+            current.walls[1] = false;
+            next.walls[3] = false;
+        }
+        else if (y == 1)
+        {
+            current.walls[0] = false;
+            next.walls[2] = false;
+        }
+        else if (y == -1)
+        {
+            current.walls[2] = false;
+            next.walls[0] = false;
+        }
+    }
+
+    private void DrawWalls()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                if (grid[x, y].walls[0])
+                {
+                    Instantiate(wall, new Vector3(x, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[1])
+                {
+                    Instantiate(wall, new Vector3(x + 1, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[2])
+                {
+                    Instantiate(wall, new Vector3(x, y - 1, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[3])
+                {
+                    Instantiate(wall, new Vector3(x - 1, y, 1), Quaternion.identity);
+                }
+            }
+        }
+    }
+    private void Start()
+    {
+        // Get the reference to the Grid script
+        Grid gridScript = FindObjectOfType<Grid>();
+
+        // Assign the grid from the Grid script to the MazeGenerator script
+        grid = gridScript.grid;
+        InitializeMaze();
+    }
+}
+
+
+
+this code isn't working, any suggestions
+This code will check if the grid is null, if it is it will try to find the Grid script in the scene and assign its grid variable to the grid variable in the MazeGenerator script. If the grid is not null it will proceed with generating the maze.
+Please note that, if the grid is not null and still the grid is not being generated then you should check the grid script, if the grid is created or not.
+Also, it is a good practice to use a method like Awake() or Start() to call the GenerateMaze() method to make sure that the grid is already set before generating the maze.
+
+
+
+the Grid.Cs creates a grid of nodes that each have a game object, how can I make the mazegene.cs to remove some of the nodes to make a maze in the negative space
+You can modify the RemoveWalls method in the MazeGenerator script to destroy the nodes that are not part of the maze.
+You can add the following code inside the RemoveWalls method:
+
+Copy code
+if (x == 1)
+{
+    current.walls[3] = false;
+    next.walls[1] = false;
+    Destroy(next.gameObject);
+}
+else if (x == -1)
+{
+    current.walls[1] = false;
+    next.walls[3] = false;
+    Destroy(next.gameObject);
+}
+else if (y == 1)
+{
+    current.walls[0] = false;
+    next.walls[2] = false;
+    Destroy(next.gameObject);
+}
+else if (y == -1)
+{
+    current.walls[2] = false;
+    next.walls[0] = false;
+    Destroy(next.gameObject);
+}
+This will destroy the game object of the nodes that are not part of the maze.
+Please make sure that you have the game object attached to the node script and the object is not being used elsewhere in the scene.
+You can also add a pooling system to improve the performance when generating a large maze.
+
+
+
+    Grid gridScript = FindObjectOfType<Grid>();
+is causing a stack overflow
+It looks like the InitializeMaze() method is calling itself when the grid is null, causing a stack overflow error.
+To fix this, you can create a boolean variable to check if the initialization is already happening, and exit the method if it is. Here is an example:
+
+Copy code
+private bool initializing = false;
+
+private void InitializeMaze()
+{
+    if(initializing) return;
+    initializing = true;
+    if(grid!=null)
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                grid[x, y].visited = false;
+                grid[x, y].walls = new bool[] { true, true, true, true };
+            }
+        }
+    }
+    else
+    {
+        Grid gridScript = FindObjectOfType<Grid>();
+
+        // Assign the grid from the Grid script to the MazeGenerator script
+        grid = gridScript.grid;
+        initializing = false;
+        InitializeMaze();
+    }
+    initializing = false;
+}
+This way when the grid is null and the method InitializeMaze() is called it does not call itself again, instead it will exit the method and wait for the next frame to check for the grid again.
+You can also move the InitializeMaze() method to Awake() or Start() method, to make sure the grid is already created before running the InitializeMaze() method
+
+
+
+TLS Allocator ALLOC_TEMP_TLS, underlying allocator ALLOC_TEMP_MAIN has unfreed allocations, size 51152
+
+This error message indicates that there is a memory leak in your code that is causing some temporary memory allocated by the "ALLOC_TEMP_TLS" allocator to not be properly freed. This memory leak is caused by the underlying "ALLOC_TEMP_MAIN" allocator, and the size of the leak is 51152 bytes.
+
+There are a few things you can try to fix this issue:
+
+Make sure that any objects that you instantiate are being properly destroyed when they are no longer needed.
+Check for any infinite loops or other logic that may be causing memory to be continuously allocated without being freed.
+Check for any static variables that may be holding references to objects that should have been destroyed.
+Try to profile your memory usage to see where the leak is coming from.
+It is hard to say exactly what the problem is without more information about your code and how it's being used. But, these are some common causes of memory leaks that you can check for in your code.
+
+If you are still having trouble, please provide more information about the context of the error and the parts of your code where it occurs, so that we can help you better.
+
+
+
+This Script:
+
+using UnityEngine;
+using System.Collections.Generic;
+
+public class MazeGenerator : MonoBehaviour
+{
+    public Node[,] grid;
+    public GameObject wall;
+    public Grid gridScript;
+
+    public void GenerateMaze()
+    {
+        InitializeMaze();
+        DFS(grid[0, 0]);
+        DrawWalls();
+    }
+
+    private bool initializing = false;
+
+    private void InitializeMaze()
+    {
+        if (initializing) return;
+        initializing = true;
+        if (grid != null)
+        {
+            for (int x = 0; x < grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < grid.GetLength(1); y++)
+                {
+                    grid[x, y].visited = false;
+                    grid[x, y].walls = new bool[] { true, true, true, true };
+                }
+            }
+        }
+
+    }
+
+    private void DFS(Node current)
+    {
+        current.visited = true;
+
+        while (true)
+        {
+            Node next = GetRandomNeighbour(current);
+            if (next == null)
+            {
+                break;
+            }
+            RemoveWalls(current, next);
+            current = next;
+            current.visited = true;
+        }
+    }
+
+    private Node GetRandomNeighbour(Node current)
+    {
+        List<Node> neighbours = new List<Node>();
+        int x = current.x;
+        int y = current.y;
+
+        if (x > 0 && !grid[x - 1, y].visited)
+        {
+            neighbours.Add(grid[x - 1, y]);
+        }
+        if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited)
+        {
+            neighbours.Add(grid[x + 1, y]);
+        }
+        if (y > 0 && !grid[x, y - 1].visited)
+        {
+            neighbours.Add(grid[x, y - 1]);
+        }
+        if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited)
+        {
+            neighbours.Add(grid[x, y + 1]);
+        }
+
+        if (neighbours.Count == 0)
+        {
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, neighbours.Count);
+        return neighbours[randomIndex];
+    }
+    private void RemoveWalls(Node current, Node next)
+    {
+        int x = current.x - next.x;
+        int y = current.y - next.y;
+
+        if (x == 1)
+        {
+            current.walls[3] = false;
+            next.walls[1] = false;
+            Destroy(next.gameObject);
+        }
+        else if (x == -1)
+        {
+            current.walls[1] = false;
+            next.walls[3] = false;
+            Destroy(next.gameObject);
+        }
+        else if (y == 1)
+        {
+            current.walls[0] = false;
+            next.walls[2] = false;
+            Destroy(next.gameObject);
+        }
+        else if (y == -1)
+        {
+            current.walls[2] = false;
+            next.walls[0] = false;
+            Destroy(next.gameObject);
+        }
+    }
+
+    private void DrawWalls()
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                if (grid[x, y].walls[0])
+                {
+                    Instantiate(wall, new Vector3(x, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[1])
+                {
+                    Instantiate(wall, new Vector3(x + 1, y, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[2])
+                {
+                    Instantiate(wall, new Vector3(x, y - 1, 1), Quaternion.identity);
+                }
+                if (grid[x, y].walls[3])
+                {
+                    Instantiate(wall, new Vector3(x - 1, y, 1), Quaternion.identity);
+                }
+            }
+        }
+    }
+    private void Start()
+    {
+        grid = gridScript.grid;
+        InitializeMaze();
+    }
+}
+
+
+is not removing any nodes from this script:
+
+
+using UnityEngine;
+
+public class Grid : MonoBehaviour
+{
+
+    public GameObject nodePrefab; // Prefab for the node
+    public int gridSizeX, gridSizeY; // The size of the grid (number of rows and columns)
+    public float nodeRadius; // The distance between the nodes
+    public Node[,] grid; // 2D array of nodes to store the grid
+
+    // Method to create the grid of nodes
+    public void CreateGrid()
+    {
+
+        grid = new Node[gridSizeX, gridSizeY]; // Initialize the 2D array of nodes
+
+        // Iterate through the rows and columns of the grid
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+
+                // Calculate the position of the node
+                Vector3 nodePos = new Vector3(x * nodeRadius, 0, y * nodeRadius);
+
+                // Instantiate a new node prefab
+                GameObject node = Instantiate(nodePrefab, nodePos, Quaternion.identity);
+                node.transform.parent = transform; // Set the prefab's parent to be the Grid gameObject
+
+                // Get the Node script component from the prefab
+                grid[x, y] = node.GetComponent<Node>();
+
+                // Check for neighboring nodes and add them
+                if (x > 0)
+                {
+                    grid[x, y].AddNeighbor(grid[x - 1, y]);
+                }
+                if (x < gridSizeX - 1)
+                {
+                    grid[x, y].AddNeighbor(grid[x + 1, y]);
+                }
+                if (y > 0)
+                {
+                    grid[x, y].AddNeighbor(grid[x, y - 1]);
+                }
+                if (y < gridSizeY - 1)
+                {
+                    grid[x, y].AddNeighbor(grid[x, y + 1]);
+                }
+            }
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        CreateGrid();
+    }
+}
+
+
+
+each node is a game object, that when I set the x and y to 10 on the grid, it just makes 100 game objects of nodes with this script:
+using UnityEngine;
+using System.Collections.Generic;
+
+public class Node : MonoBehaviour
+{
+
+    public Vector3 position; // Node's position in the scene
+    public List<Node> neighbors; // List of neighboring nodes
+    public float distance; // Distance from the start node
+    public float heuristic; // Heuristic value (if using A*)
+    public bool visited;
+    public bool[] walls;
+    public int x;
+    public int y;
+
+    public Node(Vector3 pos)
+    {
+        this.x = x;
+        this.y = y;
+        visited = false;
+        walls = new bool[] { true, true, true, true };
+        position = pos;
+        neighbors = new List<Node>();
+    }
+
+    // Method to add a neighboring node
+    public void AddNeighbor(Node neighbor)
+    {
+        neighbors.Add(neighbor);
+    }
+}
+
+
+what I want to have happen:
+
+I want the grid of nodes to be generated, then for a random maze to be created out of the negative space between the nodes that the maze generator removes, to create a path from a random starting node on the bottom to a node on the top of the grid rows
+This script is trying to generate a maze using a depth-first search algorithm. The grid of nodes is created by another script called Grid.cs. However, the script seems to have an issue with the InitializeMaze() method, where it is causing a stack overflow error. This is likely due to the recursion that is happening in the method. The if statement "if (grid != null)" is not sufficient to check if the grid is already assigned or not. When grid is null, it will try to find the gridScript and assign it to grid. But it will not check if it found the script or not, it will just call InitializeMaze() again. And this cycle repeats infinitely causing the stack overflow.
+
+To fix this issue, you could check if the gridScript variable is null, and if it is, use the FindObjectOfType() method to find it and assign it to the variable. Then you can assign the grid variable with the gridScript's grid. And also you should add a condition to exit the loop if the gridScript is not found.
+
+Also the script is trying to destroy the gameObject of the nodes that are removed from the maze, this may cause issues with references and gameObjects in the scene, instead, you could just disable the gameObjects or make them inactive or to make them transparent as an alternative.
+
+
+
+show me the new mazegene.cs
+using UnityEngine;
+using System.Collections.Generic;
+
+public class MazeGenerator : MonoBehaviour
+{
+public Node[,] grid;
+public GameObject wall;
+public Grid gridScript;
+
+Copy code
+public void GenerateMaze()
+{
+    InitializeMaze();
+    DFS(grid[0, 0]);
+    DrawWalls();
+}
+
+private bool initializing = false;
+
+private void InitializeMaze()
+{
+    if (initializing) return;
+    initializing = true;
+    if (grid != null)
+    {
+        for (int x = 0; x < grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                grid[x, y].visited = false;
+                grid[x, y].walls = new bool[] { true, true, true, true };
+            }
+        }
+    }
+    else
+    {
+        gridScript = FindObjectOfType<Grid>();
+        grid = gridScript.grid;
+    }
+    initializing = false;
+}
+
+private void DFS(Node current)
+{
+    current.visited = true;
+
+    while (true)
+    {
+        Node next = GetRandomNeighbour(current);
+        if (next == null)
+        {
+            break;
+        }
+        RemoveWalls(current, next);
+        current = next;
+        current.visited = true;
+    }
+}
+
+private Node GetRandomNeighbour(Node current)
+{
+    List<Node> neighbours = new List<Node>();
+    int x = current.x;
+    int y = current.y;
+
+    if (x > 0 && !grid[x - 1, y].visited)
+    {
+        neighbours.Add(grid[x - 1, y]);
+    }
+    if (x < grid.GetLength(0) - 1 && !grid[x + 1, y].visited)
+    {
+        neighbours.Add(grid[x + 1, y]);
+    }
+    if (y > 0 && !grid[x, y - 1].visited)
+    {
+        neighbours.Add(grid[x, y - 1]);
+    }
+    if (y < grid.GetLength(1) - 1 && !grid[x, y + 1].visited)
+    {
+        neighbours.Add(grid[x, y + 1]);
+    }
+
+    if (neighbours.Count == 0)
+    {
+        return null;
+    }
+
+    int randomIndex = Random.Range(0, neighbours.Count);
+    return neighbours[randomIndex];
+}
+private void RemoveWalls(Node current, Node next)
+{
+    int x = current.x - next.x;
+    int y = current.y - next.y;
+
+    if (x == 1)
+    {
+        current.walls[3] = false;
+        next.walls[1] = false;
+        Destroy(next.gameObject);
+    }
+    else if (x == -1
+
+
+try again this time return the code only in a code block so I can see it better
+
+!
+An error occurred. If this issue persists please contact us through our help center at help.openai.com.
