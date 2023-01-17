@@ -1907,3 +1907,1019 @@ try again this time return the code only in a code block so I can see it better
 
 !
 An error occurred. If this issue persists please contact us through our help center at help.openai.com.
+
+
+
+public class SnakesAndLadders : MonoBehaviour
+{
+    public GameObject housePrefab;
+    public float houseUnit = 1;
+    public float heightIncrement = 0.25f;
+
+    private float currentHeight = 0;
+
+    void Start()
+    {
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                // Determine the position of the current house
+                Vector3 position;
+                if (z < 10)
+                {
+                    position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+                }
+                else
+                {
+                    position = new Vector3((x+1) * houseUnit, currentHeight, z * houseUnit);
+                }
+                // Instantiate the house at the determined position
+                GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+                currentHeight += heightIncrement;
+            }
+
+
+finish this code please
+
+currentHeight = 0; // reset the currentHeight for the next row
+}
+}
+}
+
+//End of the class
+
+The above code is creating a 2D grid of houses using a nested for loop. It starts by instantiating a house at a specific position, determined by the x and z values of the current iteration of the loop. The y position of the house is determined by the currentHeight variable, which is incremented by the heightIncrement value after each house is instantiated. After all houses in the current row have been instantiated, the currentHeight variable is reset to 0 for the next row. The process will be repeated until both for loops complete their iterations.
+
+
+
+using UnityEngine;
+public class SnakesAndLadders : MonoBehaviour
+{
+    public GameObject housePrefab;
+    public float houseUnit = 1;
+    public float heightIncrement = 0.25f;
+
+    private float currentHeight = 0;
+
+    void Start()
+    {
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                // Determine the position of the current house
+                Vector3 position;
+                if (z < 10)
+                {
+                    position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+                }
+                else
+                {
+                    position = new Vector3((x + 1) * houseUnit, currentHeight, z * houseUnit);
+                }
+                // Instantiate the house at the determined position
+                GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+                currentHeight += heightIncrement;
+            }
+            currentHeight = 0; // reset the currentHeight for the next row
+        }
+    }
+}
+
+this code, modify it so, on the 11th it starts from the right side and goes left, so every other row is going teh different way
+using UnityEngine;
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            // Determine the position of the current house
+            Vector3 position;
+            if (x % 2 == 0) // check if current row is even
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else // current row is odd
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10-z-1) * houseUnit);
+            }
+            // Instantiate the house at the determined position
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+            currentHeight += heightIncrement;
+        }
+        currentHeight = 0; // reset the currentHeight for the next row
+    }
+}
+}
+The above code checks if the current row is even or odd using an if statement. If the row is even, the houses are instantiated from left to right, as before. If the row is odd, the houses are instantiated from right to left, by subtracting the value of z by 1 and by 10. This way every other row will be going the different way.
+
+
+
+make it so the rows 2-10 take the height of the previous row at there starting
+using UnityEngine;
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            // Determine the position of the current house
+            Vector3 position;
+            if (x % 2 == 0) // check if current row is even
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else // current row is odd
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10-z-1) * houseUnit);
+            }
+            // Instantiate the house at the determined position
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+        }
+        if(x>0)
+          currentHeight += heightIncrement; // increase height for the next row, only after first row
+        }
+}
+}
+The above code checks if the current row is even or odd using an if statement. If the row is even, the houses are instantiated from left to right, as before. If the row is odd, the houses are instantiated from right to left, by subtracting the value of z by 1 and by 10. An additional if statement is added, to only increase currentHeight for rows 2 to 10, so that only starting the second row the height will be different from the first row.
+
+
+
+I want it so when X>0 the starting height of that x row is the tallest object in the last row + the inccrease height
+using UnityEngine;
+
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+private float highestY = 0;  // variable to store the highest y value in the previous row
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            // Determine the position of the current house
+            Vector3 position;
+            if (x % 2 == 0) // check if current row is even
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else // current row is odd
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10-z-1) * houseUnit);
+            }
+            // Instantiate the house at the determined position
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+            if (x > 0 && house.transform.position.y > highestY)
+                highestY = house.transform.position.y;  // update highestY with the current house's y value
+        }
+        if (x > 0)
+            currentHeight = highestY + heightIncrement; // increase height for the next row based on the highest y value in the previous row
+        else
+            currentHeight = 0;
+        highestY = 0; // reset highestY for the next row
+    }
+}
+}
+
+The above code checks if the current row is even or odd using an if statement. If the row is even, the houses are instantiated from left to right, as before. If the row is odd, the houses are instantiated from right to left, by subtracting the value of z by 1 and by 10. An additional if statement is added to check the highest y value of the previous row, and that value is used to set the currentHeight for the next row. The currentHeight is set to the highest y value + the heightIncrement, so that the next row starts at the height of the highest house in the previous row. The highestY is reset to 0 for each new row.
+
+
+
+using UnityEngine;
+public class SnakesAndLadders : MonoBehaviour
+{
+    public GameObject housePrefab;
+    public float houseUnit = 1;
+    public float heightIncrement = 0.25f;
+
+    private float currentHeight = 0;
+
+   
+    private float highestY = 0;
+    void Start()
+    {
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                // Determine the position of the current house
+                Vector3 position;
+                if (x % 2 == 0) // check if current row is even
+                {
+                    position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+                }
+                else // current row is odd
+                {
+                    position = new Vector3(x * houseUnit, currentHeight, (10 - z - 1) * houseUnit);
+                }
+                // Instantiate the house at the determined position
+                GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+                if (x > 0 && house.transform.position.y > highestY)
+                    highestY = house.transform.position.y;  // update highestY with the current house's y value
+            }
+            if (x > 0)
+                currentHeight = highestY + heightIncrement; // increase height for the next row based on the highest y value in the previous row
+            else
+                currentHeight = 0;
+            highestY = 0; // reset highestY for the next row
+        }
+    }
+}
+The provided code is creating a 2D grid of houses using a nested for loop. It starts by instantiating a house at a specific position, determined by the x and z values of the current iteration of the loop. The y position of the house is determined by the currentHeight variable.
+If the current row is even, the houses are instantiated from left to right, as before. If the row is odd, the houses are instantiated from right to left, by subtracting the value of z by 1 and by 10. It also checks the highest y value of the previous row and that value is used to set the currentHeight for the next row. The currentHeight is set to the highest y value + the heightIncrement, so that the next row starts at the height of the highest house in the previous row. The highestY is reset to 0 for each new row.
+
+
+
+using UnityEngine;
+public class SnakesAndLadders : MonoBehaviour
+{
+    public GameObject housePrefab;
+    public float houseUnit = 1;
+    public float heightIncrement = 0.25f;
+
+    private float currentHeight = 0;
+
+   
+    private float highestY = 0;
+    void Start()
+    {
+        for (int x = 0; x < 10; x++)
+        {
+            for (int z = 0; z < 10; z++)
+            {
+                // Determine the position of the current house
+                Vector3 position;
+                if (x % 2 == 0) // check if current row is even
+                {
+                    position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+                }
+                else // current row is odd
+                {
+                    position = new Vector3(x * houseUnit, currentHeight, (10 - z - 1) * houseUnit);
+                }
+                // Instantiate the house at the determined position
+                GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+                if (x > 0 && house.transform.position.y > highestY)
+                    highestY = house.transform.position.y;  // update highestY with the current house's y value
+            }
+            if (x > 0)
+                currentHeight = highestY + heightIncrement; // increase height for the next row based on the highest y value in the previous row
+            else
+                currentHeight = 0;
+            highestY = 0; // reset highestY for the next row
+        }
+    }
+}
+
+
+with this code, make it so the 11th ,21st, 31st,, etc are the height of the tallest unit of the last row and then start increaseing the height from the row end unit
+using UnityEngine;
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+private float highestY = 0;
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            // Determine the position of the current house
+            Vector3 position;
+            if (x % 2 == 0) // check if current row is even
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else // current row is odd
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10 - z - 1) * houseUnit);
+            }
+            // Instantiate the house at the determined position
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+            if (x > 0 && house.transform.position.y > highestY)
+                highestY = house.transform.position.y;  // update highestY with the current house's y value
+        }
+        if (x % 10 == 9)
+            currentHeight = highestY; // set current height to the highest y value for every 10th row
+        else if (x > 0)
+            currentHeight = highestY + heightIncrement; // increase height for the next row based on the highest y value in the previous row
+        else
+            currentHeight = 0;
+        highestY = 0; // reset highestY for the next row
+    }
+}
+}
+
+The above code checks if the current row is a multiple of 10, if so it sets the currentHeight to the highestY of the previous row. If the current row is not a multiple of 10, it increases the currentHeight by the heightIncrement value as before. This way the every 10th row will start at the height of the tallest unit of the last row and then starts increasing the height from the row end unit.
+
+
+
+I want to draw 10 objects in a row going from left to right on the Z axis , and then draw 10 objects in a row going right to left on teh Z axisfrom the position of the last object in the previous row plus 1 gameobject forward on teh x.
+
+the whole time I want to increase each game object a specifc amount from the height of teh last game object.
+
+
+please clean up this code I've shared to do that
+using UnityEngine;
+
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            Vector3 position;
+            if (x % 2 == 0)
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10 - z - 1) * houseUnit);
+            }
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+        }
+        currentHeight += heightIncrement;
+    }
+}
+}
+
+The above code creates a 2D grid of houses using a nested for loop. It starts by instantiating a house at a specific position, determined by the x and z values of the current iteration of the loop. The x position of the house is determined by the current x value of the loop, and the z position is determined by the current z value of the loop. The y position of the house is determined by the currentHeight variable, which is incremented by the heightIncrement value after each house is instantiated. The first for loop will iterate 10 times and the second one will iterate 10 times as well, creating a 2D grid of 10x10 houses.
+The first for loop will iterate on the X axis, and the second one will iterate on the Z axis. Each iteration in the first loop will cause the second loop to iterate 10 times. The result will be a 10x10 grid of houses.
+The code doesn't check for the position of the last object in the previous row, but it will increment the height of each game object with a specific amount from the height of the last game object.
+I would suggest to add a variable to store the position
+
+
+
+this code only works for moving the height of each row, I want each game object to move on teh y each time it's places up an amount
+using UnityEngine;
+
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            Vector3 position;
+            if (x % 2 == 0)
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10 - z - 1) * houseUnit);
+            }
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+            currentHeight += heightIncrement;
+        }
+    }
+}
+}
+
+This code will place each object at a different height, each time it's placed, the height is incremented by the value of heightIncrement.
+This way you will get a grid of houses with increasing height on the Y axis, with each iteration.
+
+
+
+make it so we name each house we instantiate in a pattern, call them, tile.001 - tile.100
+using UnityEngine;
+
+public class SnakesAndLadders : MonoBehaviour
+{
+public GameObject housePrefab;
+public float houseUnit = 1;
+public float heightIncrement = 0.25f;
+
+Copy code
+private float currentHeight = 0;
+private int tileCounter = 1;
+
+void Start()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int z = 0; z < 10; z++)
+        {
+            Vector3 position;
+            if (x % 2 == 0)
+            {
+                position = new Vector3(x * houseUnit, currentHeight, z * houseUnit);
+            }
+            else
+            {
+                position = new Vector3(x * houseUnit, currentHeight, (10 - z - 1) * houseUnit);
+            }
+            GameObject house = Instantiate(housePrefab, position, Quaternion.identity);
+            house.name = "Tile." + tileCounter.ToString("D3"); // naming the house with the pattern "Tile.XXX" where XXX is the tileCounter variable
+            tileCounter++; // increment the tileCounter variable
+            currentHeight += heightIncrement;
+        }
+    }
+}
+}
+
+The above code will name each house that is instantiated in a pattern, "Tile.001" through "Tile.100". I added a variable called tileCounter, starting with the value of 1, and is incremented every time a house is instantiated. I then used the name property of the GameObject to set the name of the house to "Tile." + tileCounter.ToString("D3") so that the name will be in the format of "Tile.XXX" where XXX is the current value of the tileCounter variable. The ToString("D3") makes sure that the number is formatted as a 3 digit number padded with leading zeroes if necessary.
+
+
+
+now I want to create a camera mover that moves the camera up back and forth, so if given a value 10, from the start of 1, it moves up in a line, but, if given a value 30 from 1, it moves back and forth in a zig zag following the tiles created by snakes and ladder
+You can create a script called "CameraMover" that is attached to your camera object in Unity. The script should have a public float variable called "moveDistance" which will determine how far the camera should move up or back and forth.
+
+Copy code
+using UnityEngine;
+
+public class CameraMover : MonoBehaviour
+{
+    public float moveDistance = 10f;
+    private Vector3 startPos
+
+
+let me be more clear, the camera mover, should take a value of a tile, and start "looking at it" and then when given a new value, it travels in a line, but if the tile is on another row, it travels to the end of the row, in a line starting at the tile start and moving the direction of the next tile, and if the row ends before reaching the end tile, it moves to the end of teh row, then moves forward, then begins to travel in a line the opposite direction.
+
+the camera should move vertically and horizontally at the same time, a constant amount of vertical that matches the height differences between the current tile and the next and then move on a third access forward at the end of each row before moving horizontally in the opposite direction 
+I understand what you are trying to achieve now. To accomplish this, you can create a script called "CameraMover" that is attached to your camera object in Unity. The script should have a public float variable called "moveSpeed" which will determine the speed of the camera movement.
+
+Copy code
+using UnityEngine;
+
+public class CameraMover : MonoBehaviour
+{
+    public float moveSpeed = 10f;
+    public GameObject targetTile;
+    private Vector3 startPos;
+    private Vector3 endPos;
+    private bool isMoving = false;
+    private bool isVertical = true;
+    private bool isRight = true;
+
+    void Start()
+    {
+        startPos = transform.position;
+        endPos = targetTile.transform.position;
+    }
+
+    void Update()
+    {
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
+            if (transform.position == endPos)
+            {
+                isMoving = false;
+                if (isVertical)
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z + 1);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z - 1);
+                    }
+                }
+                else
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x + 1, endPos.y, endPos.z);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.y, endPos.z);
+                    }
+                }
+            }
+        }
+    }
+
+    public void MoveToTile(GameObject tile)
+    {
+        targetTile = tile;
+        endPos =
+
+
+  public void MoveToTile(GameObject tile)
+    {
+        targetTile = tile;
+        endPos =
+
+
+complete this
+targetTile.transform.position;
+isMoving = true;
+if (targetTile.transform.position.x != transform.position.x)
+{
+isVertical = false;
+if (targetTile.transform.position.x > transform.position.x)
+{
+isRight = true;
+}
+else
+{
+isRight = false;
+}
+}
+else if (targetTile.transform.position.z != transform.position.z)
+{
+isVertical = true;
+if (targetTile.transform.position.z > transform.position.z)
+{
+isRight = true;
+}
+else
+{
+isRight = false;
+}
+}
+}
+}
+
+Copy code
+
+The above code creates a new script called CameraMover, which should be attached to the camera object in Unity. The script uses the UnityEngine's Vector3.MoveTowards method to move the camera towards the targetTile's position. The moveSpeed variable determines the speed of the camera movement. The script has a public GameObject variable called targetTile, which is the tile that the camera should move towards. The script also has private Vector3 variables startPos and endPos, which are the starting and ending positions of the camera movement, respectively. The script uses a boolean variable called isMoving to keep track of whether the camera is currently moving or not. The variable isVertical is used to check whether the camera is moving vertically or horizontally and isRight variable is used to check the direction of the camera movement
+
+When the function MoveToTile is called, it sets the targetTile variable to the passed in tile gameObject, sets the endPos variable to the position of that tile, sets isMoving to true, and then checks if the camera should move vertically or horizontally and in which direction. The camera will move vertically if the x position of the target tile is the same as the x position of the camera and it will move horizontally if the z position of the target
+
+
+can we integrate the snakes and ladders code and the camera mover, so it set's the tile 1 to the target on load
+Yes, you can integrate the two scripts together by calling the MoveToTile function in the Start method of the CameraMover script, passing in the first tile object, which in this case is "Tile.001".
+
+Copy code
+using UnityEngine;
+
+public class CameraMover : MonoBehaviour
+{
+    public float moveSpeed = 10f;
+    public GameObject targetTile;
+    private Vector3 startPos;
+    private Vector3 endPos;
+    private bool isMoving = false;
+    private bool isVertical = true;
+    private bool isRight = true;
+
+    void Start()
+    {
+        targetTile = GameObject.Find("Tile.001"); // find the first tile object
+        MoveToTile(targetTile); // move the camera to the first tile
+    }
+
+    void Update()
+    {
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
+            if (transform.position == endPos)
+            {
+                isMoving = false;
+                if (isVertical)
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z + 1);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z - 1);
+                    }
+                }
+                else
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x + 1, endPos.y, endPos.z);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.y, endPos.z);
+                    }
+                }
+            }
+        }
+    }
+
+    public void MoveToTile
+
+
+using UnityEngine;
+
+public class CameraMover : MonoBehaviour
+{
+    public float moveSpeed = 10f;
+    public GameObject targetTile;
+    public Vector3 startPos;
+    public Vector3 endPos;
+    private bool isMoving = false;
+    private bool isVertical = true;
+    private bool isRight = true;
+
+    public int tileValue = 1;
+    void Start()
+    {
+        Debug.Log("Tile." + tileValue.ToString("D3"));
+       
+            Debug.Log("Tile." + tileValue.ToString("D3"));
+            targetTile = GameObject.Find("Tile."+tileValue.ToString("D3"));
+            MoveToTile(targetTile);
+            endPos = targetTile.transform.position;
+        
+        startPos = transform.position;
+        
+        
+    }
+
+    void Update()
+    {
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
+            if (transform.position == endPos)
+            {
+                isMoving = false;
+                if (isVertical)
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z + 1);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z - 1);
+                    }
+                }
+                else
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x + 1, endPos.y, endPos.z);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.y, endPos.z);
+                    }
+                }
+            }
+        }
+    }
+
+    public void MoveToTile(GameObject tile)
+    {
+        targetTile = tile;
+        endPos = targetTile.transform.position;
+        isMoving = true;
+        if (targetTile.transform.position.x != transform.position.x)
+        {
+            isVertical = false;
+            if (targetTile.transform.position.x > transform.position.x)
+            {
+                isRight = true;
+            }
+            else
+            {
+                isRight = false;
+            }
+        }
+        else if (targetTile.transform.position.z != transform.position.z)
+        {
+            isVertical = true;
+            if (targetTile.transform.position.z > transform.position.z)
+            {
+                isRight = true;
+            }
+            else
+            {
+                isRight = false;
+            }
+        }
+    }
+}
+
+
+
+I want there to be an offset, the place where the starts is where is should move along, it should only move right and left in the screen space, and it's height should be related to the height starts at and only increase if the titleCount si greater than 1
+You can achieve this by first setting the startPos variable to the initial position of the camera and then using the startPos variable to calculate the endPos in the Update method instead of using the targetTile's position directly.
+
+You can also use the tileValue variable to check if the camera should move vertically or not. If the tileValue is greater than 1, the camera will move vertically by the heightIncrement amount, otherwise it will stay at the starting height.
+
+Copy code
+using UnityEngine;
+
+public class CameraMover : MonoBehaviour
+{
+    public float moveSpeed = 10f;
+    public GameObject targetTile;
+    public Vector3 startPos;
+    public Vector3 endPos;
+    private bool isMoving = false;
+    private bool isVertical = true;
+    private bool isRight = true;
+    public float heightIncrement = 0.25f;
+
+    public int tileValue = 1;
+    void Start()
+    {
+        startPos = transform.position;
+        if (tileValue > 0)
+        {
+            targetTile = GameObject.Find("Tile."+tileValue.ToString("D3"));
+            MoveToTile(targetTile);
+            endPos = new Vector3(startPos.x, startPos.y + (tileValue-1) * heightIncrement, startPos.z);
+        }
+    }
+
+    void Update()
+    {
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
+            if (transform.position == endPos)
+            {
+                isMoving = false;
+                if (isVertical)
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z + 1);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z - 1);
+                    }
+                }
+                else
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x + 1, endPos.y, endPos.z);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.
+
+
+continue from  else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.
+y, endPos.z);
+}
+}
+}
+}
+}
+
+Copy code
+public void MoveToTile(GameObject tile)
+{
+    targetTile = tile;
+    if (targetTile.transform.position.x != startPos.x)
+    {
+        isVertical = false;
+        if (targetTile.transform.position.x > startPos.x)
+        {
+            isRight = true;
+        }
+        else
+        {
+            isRight = false;
+        }
+    }
+    else if (targetTile.transform.position.z != startPos.z)
+    {
+        isVertical = true;
+        if (targetTile.transform.position.z > startPos.z)
+        {
+            isRight = true;
+        }
+        else
+        {
+            isRight = false;
+        }
+    }
+    if (isVertical)
+    {
+        endPos = new Vector3(startPos.x, startPos.y + (tileValue-1) * heightIncrement, Mathf.Clamp(targetTile.transform.position.z, startPos.z, startPos.z + 10));
+    }
+    else
+    {
+        endPos = new Vector3(Mathf.Clamp(targetTile.transform.position.x, startPos.x, startPos.x + 10), startPos.y + (tileValue-1) * heightIncrement, startPos.z);
+    }
+    isMoving = true;
+}
+}
+
+Copy code
+This should move the camera horizontally along the x and z axis, and vertically along the y axis based on the heightIncrement value and the tileValue. The camera will also stay within the boundaries of the starting position and the end of the row.
+
+
+wiht this code:
+
+ void Update()
+    {
+        targetTile = GameObject.Find("Tile." + tileValue.ToString("D3"));
+        MoveToTile(targetTile);
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
+            if (transform.position == endPos)
+            {
+                isMoving = false;
+                if (isVertical)
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z + 1);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z - 1);
+                    }
+                }
+                else
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x + 1, endPos.y, endPos.z);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.y, endPos.z);
+                    }
+                }
+            }
+        }
+    }
+    public void MoveToTile(GameObject tile)
+    {
+        targetTile = tile;
+        if (targetTile.transform.position.x != startPos.x)
+        {
+            isVertical = false;
+            if (targetTile.transform.position.x > startPos.x)
+            {
+                isRight = true;
+            }
+            else
+            {
+                isRight = false;
+            }
+        }
+        else if (targetTile.transform.position.z != startPos.z)
+        {
+            isVertical = true;
+            if (targetTile.transform.position.z > startPos.z)
+            {
+                isRight = true;
+            }
+            else
+            {
+                isRight = false;
+            }
+        }
+        if (isVertical)
+        {
+            endPos = new Vector3(startPos.x, startPos.y + (tileValue - 1) * heightIncrement, Mathf.Clamp(targetTile.transform.position.z, startPos.z, startPos.z + 10));
+        }
+        else
+        {
+            endPos = new Vector3(Mathf.Clamp(targetTile.transform.position.x, startPos.x, startPos.x + 10), startPos.y + (tileValue - 1) * heightIncrement, startPos.z);
+        }
+        isMoving = true;
+    }
+
+}
+
+
+
+
+make it so we move the the x of the tile
+Copy code
+void Update()
+    {
+        targetTile = GameObject.Find("Tile." + tileValue.ToString("D3"));
+        MoveToTile(targetTile);
+        if (isMoving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, endPos, moveSpeed * Time.deltaTime);
+            if (transform.position == endPos)
+            {
+                isMoving = false;
+                if (isVertical)
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z + 1);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x, endPos.y, endPos.z - 1);
+                    }
+                }
+                else
+                {
+                    if (isRight)
+                    {
+                        endPos = new Vector3(endPos.x + 1, endPos.y, endPos.z);
+                    }
+                    else
+                    {
+                        endPos = new Vector3(endPos.x - 1, endPos.y, endPos.z);
+                    }
+                }
+            }
+        }
+    }
+    public void MoveToTile(GameObject tile)
+    {
+        targetTile = tile;
+        if (targetTile.transform.position.x != startPos.x)
+        {
+            isVertical
+
+
+keep going from isVertical
+isVertical = false;
+if (targetTile.transform.position.x > startPos.x)
+{
+isRight = true;
+}
+else
+{
+isRight = false;
+}
+}
+else if (targetTile.transform.position.z != startPos.z)
+{
+isVertical = true;
+if (targetTile.transform.position.z > startPos.z)
+{
+isRight = true;
+}
+else
+{
+isRight = false;
+}
+}
+if (isVertical)
+{
+endPos = new Vector3(startPos.x, startPos.y + (tileValue - 1) * heightIncrement, Mathf.Clamp(targetTile.transform.position.z, startPos.z, startPos.z + 10));
+}
+else
+{
+endPos = new Vector3(Mathf.Clamp(targetTile.transform.position.x, startPos.x, startPos.x + 10), startPos.y + (tileValue - 1) * heightIncrement, startPos.z);
+}
+isMoving = true;
+}
+}
+
+Copy code
+You can adjust the clamp to match the number of tiles in each row and adjust the height increment to match the height difference between each tile.
